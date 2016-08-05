@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   belongs_to :dong1, class_name: 'User', :foreign_key => :dong1_id
   belongs_to :dong2, class_name: 'User', :foreign_key => :dong2_id
   belongs_to :period1, class_name: 'Period', :foreign_key => :period1_id
-  belongs_to :period1, class_name: 'Period', :foreign_key => :period2_id
+  belongs_to :period2, class_name: 'Period', :foreign_key => :period2_id
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -34,7 +34,17 @@ class User < ActiveRecord::Base
   
   #univ info and dong info
   def univ_info
-    info  = {univ: Univ.all,dong: Dong.all}
+    info  = {univ: Univ.all}
     return info
   end
+  
+  def register_profile(info)
+    self.name = info[:name]
+    # self.birth = info.birth
+    # self.univ = info.univ
+    self.major = info[:major]
+    self.stage = 1
+    self.save
+  end
+  
 end

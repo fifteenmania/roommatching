@@ -1,3 +1,9 @@
 깃 푸쉬
 
 //상환 첫번째 푸쉬
+
+날짜입력 형식 정해야함
+model user register_profile
+
+@user.persisted?
+false인 경우 세션 체크 안함

@@ -32,17 +32,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       render :json => result.to_json
     else  
       @user = User.from_omniauth(request.env["omniauth.auth"])
-      if @user.stage==0
-        redirect_to "/profile/new"
-      else
         if @user.persisted?
-          sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+          sign_in @user, :event => :authentication #this will throw if @user is not activated
           set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+          if @user.stage==0
+            redirect_to "/profile/new"
+          else
+            redirect_to "/"
+          end
         else
           session["devise.facebook_data"] = request.env["omniauth.auth"]
-          redirect_to new_user_registration_url
+          # if @user.stage==0
+          redirect_to "/profile/new"
+          # else
+            # redirect_to "/profile/new"
+            # redirect_to new_user_registration_url
+          # end
         end
-      end
     end
   end
 
