@@ -6,6 +6,7 @@ class UserFacebookProperty < ActiveRecord::Migration
     add_column :users, :name, :string
     add_column :users, :gender, :string
     add_column :users, :major, :string
+    add_column :users, :univ_id, :integer
     add_column :users, :stage, :integer
     add_column :users, :birth, :date
     add_column :users, :dong1_id, :integer

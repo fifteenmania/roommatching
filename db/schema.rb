@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160803101458) do
     t.string   "name"
     t.string   "gender"
     t.string   "major"
+    t.integer  "univ_id"
     t.integer  "stage"
     t.date     "birth"
     t.integer  "dong1_id"

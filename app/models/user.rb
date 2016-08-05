@@ -41,10 +41,29 @@ class User < ActiveRecord::Base
   def register_profile(info)
     self.name = info[:name]
     # self.birth = info.birth
-    # self.univ = info.univ
+    self.univ_id = info[:univ]
     self.major = info[:major]
     self.stage = 1
     self.save
+  end
+  
+  def profile_info
+    result = {myinfo:{name:self.name,univ:self.univ,birth:self.birth,major:self.major},univ: Univ.all}
+    return result
+  end
+  
+  def update_dorm_survey(info)
+    self.dong1_id = info[:dong1_id]
+    self.dong2_id = info[:dong2_id]
+    self.period1_id = info[:period1_id]
+    self.period2_id = info[:period2_id]
+    self.save
+  end
+  
+  def dorm_survey_info
+    myuniv = self.univ
+    result = {dorminfo:{univ:self.univ,dong1_id:self.dong1_id,dong2_id:self.dong2_id,period1_id:self.period1_id,period2_id:self.period2_id},dong: myuniv.dong,period: myuniv.period.where(in_progress:true)}
+    return result
   end
   
 end
