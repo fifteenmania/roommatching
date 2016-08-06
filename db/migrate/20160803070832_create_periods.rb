@@ -1,7 +1,7 @@
 class CreatePeriods < ActiveRecord::Migration
   def change
     create_table :periods do |t|
-      t.integer :univ_id
+      t.belongs_to :univ, index: true
       t.string :name
       t.boolean :in_progress
 

@@ -1,7 +1,7 @@
 class CreateDongs < ActiveRecord::Migration
   def change
     create_table :dongs do |t|
-      t.integer :univ_id
+      t.belongs_to :univ, index: true
       t.string :gender
       t.string :name
       

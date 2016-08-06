@@ -29,7 +29,20 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-
+      
+      t.string :provider
+      t.string :uid
+      t.string :image
+      t.string :name
+      t.string :gender
+      t.string :major
+      t.string :birth
+      t.string :stage
+      t.belongs_to :univ, index: true
+      t.belongs_to :dong1, index: true
+      t.belongs_to :dong2, index: true
+      t.belongs_to :period1, index: true
+      t.belongs_to :period2, index: true
 
       t.timestamps null: false
     end
