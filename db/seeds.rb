@@ -80,7 +80,7 @@ PEOPLE_NUM.times do |i|
     univ = Univ.all.sample
     user.univ = univ
     user.dong1 = univ.dongs.where(gender: user.gender).sample
-    user.dong2 = univ.dongs.where(gender: user.gender).where.not(id: user.dong2).sample
+    user.dong2 = univ.dongs.where(gender: user.gender).where.not(id: user.dong1).sample
     user.period1 = univ.periods.sample
     user.period2 = univ.periods.where.not(id: user.period1).sample
     user.save
