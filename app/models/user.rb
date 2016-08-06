@@ -71,7 +71,8 @@ class User < ActiveRecord::Base
   
   #-------------- matching ------------ #
   def matching_fitness(user)
-    self_survey = self.perference_survey
+    fitness = 0
+    self_survey = self.preference_survey
     user_survey = user.survey
     if self_survey.sociality == user_survey.sociality then fitness += 1 end
     if self_survey.familiarity == user_survey.familiarity then fitness += 1 end
