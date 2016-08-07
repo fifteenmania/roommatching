@@ -1,3 +1,3 @@
-class Survey < ActiveRecord::Base
+class Survey < SuperSurvey
     belongs_to :user, dependent: :destroy
 end

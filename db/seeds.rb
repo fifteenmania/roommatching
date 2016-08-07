@@ -21,20 +21,6 @@ DATE_MAX = 1999
 genders = ["male", "female"]
 majors = ["physics", "math", "chem", "politics", "economy", "english", "biology", "psycology", "architecture"]
 
-def random_survey_property
-    return rand(1..4)
-end
-
-def random_survey(survey)
-    survey.sociality = random_survey_property
-    survey.familiarity = random_survey_property
-    survey.awaken = random_survey_property
-    survey.smoke = random_survey_property
-    survey.game = random_survey_property
-    survey.waketime = random_survey_property
-    survey.save
-end
-
 def random_date
     return Date.new(rand(DATE_MIN..DATE_MAX), 1, 1)
 end
@@ -86,11 +72,13 @@ PEOPLE_NUM.times do |i|
     user.save
     
     survey = Survey.new
-    random_survey(survey)
+    survey.random_survey
+    survey.save
     user.survey = survey
     
     preference_survey= PreferenceSurvey.new
-    random_survey(preference_survey)
+    preference_survey.random_survey
+    preference_survey.save
     user.preference_survey = preference_survey
 end
 
