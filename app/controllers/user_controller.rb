@@ -8,7 +8,7 @@ class UserController < ApplicationController
     
     def registerProfile
         # puts current_user.inspect
-        current_user.register_profile(params.permit(:name,:birth,:univ,:major))
+        current_user.register_profile(profile_params)
         redirect_to "/"
     end
     
@@ -18,7 +18,7 @@ class UserController < ApplicationController
     end
     
     def updateProfile
-        current_user.register_profile(params.permit(:name,:birth,:univ,:major))
+        current_user.register_profile(profile_params)
         redirect_to "/"
     end
     
@@ -32,4 +32,8 @@ class UserController < ApplicationController
         redirect_to "/"
     end
     
+    private
+        def profile_params
+            params.permit(:name,:birth,:univ,:major)
+        end
 end

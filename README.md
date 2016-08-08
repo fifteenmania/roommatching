@@ -27,3 +27,9 @@ To watch some training videos, visit http://www.youtube.com/user/c9ide
 # roommatching
 roommatching develope
 >>>>>>> fdc5b53806d6625d39b6800d68f1f96e05c12177
+
+
+referenced pages
+
+-model to json
+http://jonathanjulian.com/2010/04/rails-to_json-or-as_json/
