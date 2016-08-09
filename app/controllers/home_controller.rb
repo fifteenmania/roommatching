@@ -5,6 +5,6 @@ class HomeController < ApplicationController
     
     def userinfo
         render :json => {is_login: !current_user.nil?, 
-                        user: current_user.as_json(only: [:image, :email, :stage])}
+                        user: current_user.basic_info_as_json}
     end
 end

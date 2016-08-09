@@ -4,17 +4,23 @@ Rails.application.routes.draw do
   root 'home#index'
   
   get 'home' => 'home#userinfo', :as => :home
-  get 'profile/new' => 'user#registerProfileInfo'
-  post 'profile/new' => 'user#registerProfile'
-  get 'profile' => 'user#ProfileInfo'
-  post 'profile' => 'user#updateProfile'
-  get 'dormsurvey' => 'user#dormSurveyInfo'
-  post 'dormsurvey' => 'user#updateDormSurvey'
   
-  get 'survey' => 'survey#edit', :as => :edit_survey
-  post 'survey' => 'survey#create', :as => :survey
+  get 'profile' => 'profile#new'
+  post 'profile' => 'profile#create'
+  get 'profile/edit' => 'profile#edit'
+  post 'profile/edit' => 'profile#update'
   
-  get 'survey/test' => 'survey', :as => :new_survey
+  get 'dormsurvey' => 'dorm_survey#new'
+  post 'dormsurvey' => 'dorm_survey#create'
+  get 'dormsurvey/edit' => 'dorm_survey#edit'
+  post 'dormsurvey/edit' => 'dorm_survey#update'
+  
+  get 'survey' => 'survey#new'
+  post 'survey' => 'survey#create'
+  get 'survey/edit' => 'survey#edit'
+  post 'survey/edit' => 'survey#update'
+  
+  get 'match' => 'match#show'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

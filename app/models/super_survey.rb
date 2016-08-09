@@ -1,6 +1,7 @@
 class SuperSurvey < ActiveRecord::Base
     self.abstract_class = true
     @@questions = [:sociality, :familiarity, :awaken, :smoke, :game, :waketime]
+    
     def self.questions
         return @@questions
     end
@@ -13,5 +14,9 @@ class SuperSurvey < ActiveRecord::Base
         self.class.questions.each do |question|
            self[question] = rand(1..4)
         end
+    end
+    
+    def questions_as_json
+       return self.as_json(only: @@questions) 
     end
 end

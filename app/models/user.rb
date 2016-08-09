@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   belongs_to :period2, class_name: 'Period', foreign_key: "period2_id"
   scope :all_except, ->(user) { where.not(id: user) }
   
+  
+  @@basic_info = [:image, :email, :stage]
+  @@profile = [:name, :univ, :birth, :major]
+  MATCH_NUM = 3
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -33,43 +38,23 @@ class User < ActiveRecord::Base
     end
   end
   
-  #univ info and dong info
-  def univ_info
-    info  = {univ: Univ.all}
-    return info
+  def basic_info
+    return @@basic_info
   end
   
-  def register_profile(info)
-    self.name = info[:name]
-    # self.birth = info.birth
-    self.univ_id = info[:univ]
-    self.major = info[:major]
-    self.stage = 1
-    self.save
+  def basic_info_as_json
+    return self.as_json(only: @@basic_info)
   end
   
-  def profile_info
-    result = {myinfo:{name:self.name,univ:self.univ,birth:self.birth,major:self.major},univ: Univ.all}
-    return result
+  def profile
+    return @@profile
   end
   
-  def update_dorm_survey(info)
-    self.dong1_id = info[:dong1_id]
-    self.dong2_id = info[:dong2_id]
-    self.period1_id = info[:period1_id]
-    self.period2_id = info[:period2_id]
-    self.save
+  def profile_as_json
+    return self.as_json(only: @@profile)
   end
   
-  def dorm_survey_info
-    myuniv = self.univ
-    result = {dorminfo:{univ:self.univ,dong1_id:self.dong1_id,dong2_id:self.dong2_id,period1_id:self.period1_id,period2_id:self.period2_id},dong: myuniv.dong,period: myuniv.period.where(in_progress:true)}
-    return result
-  end
-  
-  
-  
-  #-------------- matching ------------ #
+  #-------------- matching -------------- #
   def matching_fitness(user)
     fitness = 0
     self_survey = self.preference_survey
@@ -95,7 +80,7 @@ class User < ActiveRecord::Base
     end
     
     # pick top three best-fit users and match the current user with them.
-    top_users = fitnesses.sort.reverse[0..2]
+    top_users = fitnesses.sort.reverse.first(MATCH_NUM)
     
     return top_users
   end
