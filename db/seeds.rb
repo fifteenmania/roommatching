@@ -8,8 +8,8 @@
 #  Mayor.create(name: 'Emanuel', city: cities.first)
 
 # seed parameters
-PEOPLE_NUM = 30
-UNIV_NUM = 10
+PEOPLE_NUM = 200
+UNIV_NUM = 4
 PERIOD_MIN_NUM = 1
 PERIOD_MAX_NUM = 2
 DONG_MIN_NUM = 4
