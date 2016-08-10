@@ -31,5 +31,22 @@ roommatching develope
 
 referenced pages
 
+
+[json build]
 -model to json
 http://jonathanjulian.com/2010/04/rails-to_json-or-as_json/
+
+-json builder
+https://github.com/rails/jbuilder
+
+-oj usage(fast json builder)
+https://github.com/ohler55/oj
+http://www.rubydoc.info/gems/oj
+
+
+[optimization]
+-app optimization
+http://marianposaceanu.com/articles/improve-rails-performance-by-adding-a-few-gems
+
+-json lightning technique
+http://brainspec.com/blog/2012/09/28/lightning-json-in-rails/

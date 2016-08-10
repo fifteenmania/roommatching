@@ -1,4 +1,4 @@
-class DormSurveyController < ApplicationController
+class DormSurveysController < ApplicationController
     def new
         univ = current_user.univ
         dorms = univ.dongs.where(gender: current_user.gender)
@@ -30,6 +30,6 @@ class DormSurveyController < ApplicationController
     private
         def dorm_survey_params
             # id위조 방지 위해 id범위 제한하는 코드 추가
-            params.require(user).permit(:dong1_id,:dong2_id,:period1_id,:period2_id)
+            params.permit(:dong1_id,:dong2_id,:period1_id,:period2_id)
         end
 end

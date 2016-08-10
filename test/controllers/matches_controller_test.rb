@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DormSurveyControllerTest < ActionController::TestCase
+class MatchesControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

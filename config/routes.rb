@@ -1,26 +1,26 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" },
                     :path => '', :path_names => {:sign_in => 'sign_in', :sign_out => 'sign_out'}
-  root 'home#index'
+  root 'home#protocall_test'
   
-  get 'home' => 'home#userinfo', :as => :home
+  get 'home' => 'home#index'
   
-  get 'profile' => 'profile#new'
-  post 'profile' => 'profile#create'
-  get 'profile/edit' => 'profile#edit'
-  post 'profile/edit' => 'profile#update'
+  get 'profile' => 'profiles#new'
+  post 'profile' => 'profiles#create'
+  get 'profile/edit' => 'profiles#edit'
+  post 'profile/edit' => 'profiles#update'
   
-  get 'dormsurvey' => 'dorm_survey#new'
-  post 'dormsurvey' => 'dorm_survey#create'
-  get 'dormsurvey/edit' => 'dorm_survey#edit'
-  post 'dormsurvey/edit' => 'dorm_survey#update'
+  get 'dormsurvey' => 'dorm_surveys#new'
+  post 'dormsurvey' => 'dorm_surveys#create'
+  get 'dormsurvey/edit' => 'dorm_surveys#edit'
+  post 'dormsurvey/edit' => 'dorm_surveys#update'
   
-  get 'survey' => 'survey#new'
-  post 'survey' => 'survey#create'
-  get 'survey/edit' => 'survey#edit'
-  post 'survey/edit' => 'survey#update'
+  get 'survey' => 'surveys#new'
+  post 'survey' => 'surveys#create'
+  get 'survey/edit' => 'surveys#edit'
+  post 'survey/edit' => 'surveys#update'
   
-  get 'match' => 'match#show'
+  get 'match' => 'matches#show'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

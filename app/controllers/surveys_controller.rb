@@ -1,4 +1,4 @@
-class SurveyController < ApplicationController
+class SurveysController < ApplicationController
     def new
         render :json => {}
     end

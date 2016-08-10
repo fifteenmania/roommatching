@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class ProfilesController < ApplicationController
     def new
         render :json => {user: current_user.profile_as_json, 
                         univs: Univ.names_as_json}
@@ -23,6 +23,6 @@ class ProfileController < ApplicationController
     
     private
         def profile_params
-            params.require(:user).permit(:name, :birth, :univ, :major)
+            params.permit(:name, :birth, :univ, :major)
         end
 end

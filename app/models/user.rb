@@ -38,16 +38,16 @@ class User < ActiveRecord::Base
     end
   end
   
-  def basic_info
+  def self.basic_info
     return @@basic_info
+  end
+  
+  def self.profile
+    return @@profile
   end
   
   def basic_info_as_json
     return self.as_json(only: @@basic_info)
-  end
-  
-  def profile
-    return @@profile
   end
   
   def profile_as_json
@@ -55,6 +55,8 @@ class User < ActiveRecord::Base
   end
   
   #-------------- matching -------------- #
+  # should be refactored with sql (performance matter)
+  
   def matching_fitness(user)
     fitness = 0
     self_survey = self.preference_survey
@@ -68,10 +70,8 @@ class User < ActiveRecord::Base
     return fitness
   end
   
-  def find_match
-    ## fix: have to add some conditions for matching(gender, dorm, ..).
-    ## ex) User.all_except(self).where(gender: self.gender)
-    users = User.all_except(self).where(stage: 4)
+  def find_matches
+    users = User.all_except(self).where(stage: 4, gender: self.gender, univ: self.univ_id)
     fitnesses = Array.new(users.length)
     
     # calculate matching fitnesses with all the matchable users.
@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
     top_users = fitnesses.sort.reverse.first(MATCH_NUM)
     
     return top_users
+  end
+  
+  def find_matches_as_json
+    user_matches = self.find_matches
+    Jbuilder.new do |match_json|
+       user_matches.each do |user_match|
+         match_json.fitness user_match[0]
+       end
+    end
   end
   
 end
