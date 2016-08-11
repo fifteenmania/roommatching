@@ -1,10 +1,6 @@
 class DormSurveysController < ApplicationController
     def new
-        univ = current_user.univ
-        dorms = univ.dongs.where(gender: current_user.gender)
-        periods = univ.periods.where(in_progress: true)
-        render :json => {dorms: dorms.as_json(only: [:id, :name]), 
-                        periods: periods.as_json(only: [:id, :name])}
+        render :json => current_user.univ_as_json
     end
     
     def craete
@@ -14,11 +10,7 @@ class DormSurveysController < ApplicationController
     end
     
     def edit
-        univ = current_user.univ
-        dorms = univ.dongs.where(gender: current_user.gender)
-        periods = univ.periods.where(in_progress: true)
-        render :json => {dorms: dorms.as_json(only: [:id, :name]), 
-                        periods: periods.as_json(only: [:id, :name])}
+        render :json => current_user.univ_as_json
     end
     
     def update
@@ -30,6 +22,6 @@ class DormSurveysController < ApplicationController
     private
         def dorm_survey_params
             # id위조 방지 위해 id범위 제한하는 코드 추가
-            params.permit(:dong1_id,:dong2_id,:period1_id,:period2_id)
+            params.require(:user).permit(:dong1_id,:dong2_id,:period1_id,:period2_id)
         end
 end

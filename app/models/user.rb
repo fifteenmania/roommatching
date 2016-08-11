@@ -46,12 +46,22 @@ class User < ActiveRecord::Base
     return @@profile
   end
   
+  
+  # ------------- json sendings ----------- #
   def basic_info_as_json
     return self.as_json(only: @@basic_info)
   end
   
   def profile_as_json
     return self.as_json(only: @@profile)
+  end
+  
+  def univ_as_json
+    univ = self.univ
+    dorms = univ.dongs.where(gender: self.gender)
+    periods = univ.periods.where(in_progress: true)
+    return {dorms: dorms.as_json(only: [:id, :name]), 
+            periods: periods.as_json(only: [:id, :name])}
   end
   
   #-------------- matching -------------- #
@@ -65,7 +75,6 @@ class User < ActiveRecord::Base
     if self_survey.smoke == user_survey.smoke then fitness += 1 end
     if self_survey.game == user_survey.game then fitness += 1 end
     if self_survey.waketime == user_survey.waketime then fitness += 1 end
-    
     return fitness
   end
   
@@ -94,5 +103,15 @@ class User < ActiveRecord::Base
   
   def find_matches
     return User.where(id: self.find_match_ids)
+  end
+  
+  def find_matches_as_json
+    user_matches = self.find_matches
+    info = {}
+    info[:users] = []
+    user_matches.each do |user_match|
+      info[:users] << {user: user_match.as_json(only: [:name, :email, :birth]), survey: user_match.survey.questions_as_json}
+    end
+    return info
   end
 end
