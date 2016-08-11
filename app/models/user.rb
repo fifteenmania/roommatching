@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  serialize :metadata, Oj
+  
   has_one :survey
   has_one :preference_survey
   belongs_to :univ
@@ -10,8 +12,8 @@ class User < ActiveRecord::Base
   belongs_to :dong2, class_name: 'Dong', foreign_key: "dong2_id"
   belongs_to :period1, class_name: 'Period', foreign_key: "period1_id"
   belongs_to :period2, class_name: 'Period', foreign_key: "period2_id"
-  scope :all_except, ->(user) { where.not(id: user) }
   
+  scope :all_except, ->(user) { where.not(id: user) }
   
   @@basic_info = [:image, :email, :stage]
   @@profile = [:name, :univ, :birth, :major]

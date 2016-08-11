@@ -1,5 +1,7 @@
 class SuperSurvey < ActiveRecord::Base
     self.abstract_class = true
+    serialize :metadata, Oj
+    
     @@questions = [:sociality, :familiarity, :awaken, :smoke, :game, :waketime]
     
     def self.questions

@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'oj'
+gem 'oj_mimic_json'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

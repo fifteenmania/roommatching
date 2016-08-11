@@ -17,7 +17,7 @@ class SurveysController < ApplicationController
         preference_survey = current_user.preference_survey
         
         render :json => {survey: survey.questions_as_json,
-            preference_survey: preference_survey.questions_as_json}
+                        preference_survey: preference_survey.questions_as_json}
     end
     
     def update
