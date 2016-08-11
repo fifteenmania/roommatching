@@ -6,6 +6,10 @@ class Univ < ActiveRecord::Base
     has_many :dongs
     
     def self.names_as_json
-       return self.all.as_json(only: [:id, :name])
+       return self.select(:id, :name).as_json
+    end
+    
+    def as_json
+       return super(only: [:id, :name])
     end
 end

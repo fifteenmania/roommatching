@@ -18,13 +18,11 @@ class SuperSurvey < ActiveRecord::Base
         end
     end
     
-    def questions_as_json
-       return self.as_json(only: @@questions) 
+    def as_json(options={})
+        return super(:only => @@questions)
     end
     
-    def to_builder
-        Jbuilder.new do |survey|
-           survey.(self, :sociality, :familiarity, :awaken, :smoke, :game, :waketime) 
-        end
+    def questions_as_json
+       return self.as_json(only: @@questions) 
     end
 end
