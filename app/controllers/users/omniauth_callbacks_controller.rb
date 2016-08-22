@@ -38,12 +38,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if @user.stage==0
             redirect_to profile_path
           else
-            redirect_to root_path
+            # redirect_to root_path
+            # redirect_to home_path
+            render :json => {is_login: true,
+                        user: @user.basic_info_as_json}  
           end
         else
           session["devise.facebook_data"] = request.env["omniauth.auth"]
           # if @user.stage==0
-          redirect_to profile_path
+          # redirect_to profile_path
+          render :json => {is_login: true,
+            user: @user.basic_info_as_json} 
           # else
             # redirect_to "/profile/new"
             # redirect_to new_user_registration_url
